@@ -103,18 +103,13 @@ if($loggedIn) {
 						$pictureid = $row["id"];
 						$ownerid= $row["owner"];
 						echo "<a href='$url'> <img class = 'myImage' src='$url'> </a> <p>$pictureid</p> ";
-					}
-					echo '	<form method="POST">
-					<input type="text" name="DeletePictureID">
-					<input type="submit" name="deletepic" value="deletepic">
-					</form>';
-
+					} 	
+						echo '<form method="POST"> <input type="text" name="DeletePictureID"> <input type="submit" name="deletepic" value="deletepic"> </form>';
 					if (isset($_POST['deletepic'])) {
 						$picturenumber=$_POST['DeletePictureID'];
 						$sql='DELETE FROM images WHERE id="'.$picturenumber.'"';
 						if ($ownerid=$id) {
-							echo " ";
-							//mysqli_query($conn,$sql);
+							mysqli_query($conn,$sql);
 						}
 						else{
 							echo "This is not your picture!";
