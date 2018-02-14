@@ -4,7 +4,7 @@ $loggedIn = isset($_SESSION['userID']);
 if($loggedIn) {
 	$id = $_SESSION['userID'];
 	$conn = mysqli_connect("localhost", "root", "", "databaseexam");
-	$sql = "SELECT id, imageURL FROM images WHERE owner = id";
+	$sql = "SELECT id, imageURL FROM images WHERE owner = $id";
 	$imageresult = $conn->query($sql);
 }
 ?>
@@ -95,13 +95,11 @@ if($loggedIn) {
 
 			<?php 
 			if ($loggedIn) {
-				
-			
 				if($imageresult) {
 					echo "<h2>Dine Billeder</h2>";
 					while($row = $imageresult->fetch_assoc()) {
 						$url = $row["imageURL"];
-						echo "<img class = 'myImage' src='$url'>";
+						echo "<a href='$url'> <img class = 'myImage' src='$url'> </a>";
 					}
 				}
 			} 

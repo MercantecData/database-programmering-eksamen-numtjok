@@ -5,12 +5,12 @@ $password = $_POST["password"];
 
 $conn = mysqli_connect("localhost", "root", "", "databaseexam");
 
-$sql = "SELECT id, name FROM users WHERE username = '$usrname' AND password = '$password'";
+$sql = "SELECT UserID, name FROM users WHERE username = '$usrname' AND password = '$password'";
 echo $sql . "<br>";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 var_dump($row);
-$id = $row["id"];
+$id = $row["UserID"];
 $name = $row["name"];
 $_SESSION['userID'] = $id;
 $_SESSION["userName"] = $name;
