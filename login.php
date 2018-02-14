@@ -10,8 +10,8 @@ echo $sql . "<br>";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 var_dump($row);
-$id = $row["UserID"];
+$UserId = $row["UserID"];
 $name = $row["name"];
-$_SESSION['userID'] = $id;
+$_SESSION['userID'] = $UserId;
 $_SESSION["userName"] = $name;
 header("Location: index.php");//redirects back

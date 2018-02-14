@@ -4,7 +4,7 @@ $loggedIn = isset($_SESSION['userID']);
 if($loggedIn) {
 	$id = $_SESSION['userID'];
 	$conn = mysqli_connect("localhost", "root", "", "databaseexam");
-	$sql = "SELECT id, imageURL FROM images WHERE owner = $id";
+	$sql = "SELECT id, imageURL, owner FROM images WHERE owner = $id";
 	$imageresult = $conn->query($sql);
 }
 ?>
@@ -96,14 +96,74 @@ if($loggedIn) {
 			<?php 
 			if ($loggedIn) {
 				if($imageresult) {
+
 					echo "<h2>Dine Billeder</h2>";
 					while($row = $imageresult->fetch_assoc()) {
 						$url = $row["imageURL"];
-						echo "<a href='$url'> <img class = 'myImage' src='$url'> </a>";
+						$pictureid = $row["id"];
+						$ownerid= $row["owner"];
+						echo "<a href='$url'> <img class = 'myImage' src='$url'> </a> <p>$pictureid</p> ";
+					}
+					echo '	<form method="POST">
+					<input type="text" name="DeletePictureID">
+					<input type="submit" name="deletepic" value="deletepic">
+					</form>';
+
+					if (isset($_POST['deletepic'])) {
+						$test=$conn->query($sql);
+						$row2=$test->fetch_assoc();
+						$ownerid= $row2["owner"];
+						$picturenumber=$_POST['DeletePictureID'];
+						$sql='DELETE FROM images WHERE id="'.$picturenumber.'"';
+						var_dump($ownerid);
+						var_dump($id);
+						if ($ownerid=$id) {
+							echo "why";
+							//mysqli_query($conn,$sql);
+						}
+						else{
+							echo "This is not your picture!";
+						}
 					}
 				}
 			} 
 			?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<div class="myTextArea"><p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus feugiat quis purus ut bibendum. Mauris sit amet lacinia arcu. Vivamus fringilla magna id augue luctus interdum. Aliquam urna dui, efficitur at imperdiet sed, ultricies eu tellus. Pellentesque iaculis sagittis nisi id ultrices. Phasellus pharetra diam ac ex feugiat dapibus eget a diam. Fusce ullamcorper nunc quis massa ornare dapibus. Nunc efficitur nunc ut consectetur condimentum. Maecenas faucibus quis justo nec venenatis. Donec at placerat magna. Donec a lobortis eros. Aliquam erat volutpat. Proin gravida orci ut semper aliquet. Donec vitae purus commodo, accumsan purus sed, congue neque. Nullam egestas, augue sed euismod mollis, leo risus elementum nisi, non venenatis felis justo ac libero.
 			</p>
