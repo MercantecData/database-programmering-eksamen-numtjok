@@ -6,6 +6,7 @@ if($loggedIn) {
 	$conn = mysqli_connect("localhost", "root", "", "databaseexam");
 	$sql = "SELECT id, imageURL, owner FROM images WHERE owner = $id";
 	$imageresult = $conn->query($sql);
+
 }
 ?>
 <!DOCTYPE html>
@@ -96,7 +97,6 @@ if($loggedIn) {
 			<?php 
 			if ($loggedIn) {
 				if($imageresult) {
-
 					echo "<h2>Dine Billeder</h2>";
 					while($row = $imageresult->fetch_assoc()) {
 						$url = $row["imageURL"];
@@ -110,15 +110,10 @@ if($loggedIn) {
 					</form>';
 
 					if (isset($_POST['deletepic'])) {
-						$test=$conn->query($sql);
-						$row2=$test->fetch_assoc();
-						$ownerid= $row2["owner"];
 						$picturenumber=$_POST['DeletePictureID'];
 						$sql='DELETE FROM images WHERE id="'.$picturenumber.'"';
-						var_dump($ownerid);
-						var_dump($id);
 						if ($ownerid=$id) {
-							echo "why";
+							echo " ";
 							//mysqli_query($conn,$sql);
 						}
 						else{
@@ -128,35 +123,6 @@ if($loggedIn) {
 				}
 			} 
 			?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
