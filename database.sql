@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 14. 02 2018 kl. 12:25:59
+-- Genereringstid: 14. 02 2018 kl. 12:36:35
 -- Serverversion: 10.1.28-MariaDB
 -- PHP-version: 7.1.11
 
@@ -58,12 +58,13 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `imageURL`, `owner`) VALUES
-(1, 'https://imgix.ranker.com/user_node_img/50047/1000931305/original/x-wing-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(2, 'https://imgix.ranker.com/user_node_img/50047/1000931279/original/millennium-falcon-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(3, 'https://imgix.ranker.com/user_node_img/50047/1000931306/original/vader-and-39-s-tie-fighter-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(4, 'https://imgix.ranker.com/user_node_img/50047/1000931297/original/star-destroyer-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
 (6, 'http://static.tvtropes.org/pmwiki/pub/images/friendship_is_magic_newpageimage_1684.png', 2),
-(7, 'https://vignette.wikia.nocookie.net/mugen/images/1/13/Fluttershy_artwork.png/revision/latest?cb=20130311003323', 2);
+(7, 'https://vignette.wikia.nocookie.net/mugen/images/1/13/Fluttershy_artwork.png/revision/latest?cb=20130311003323', 2),
+(12, 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/1280px-Star_Wars_Logo.svg.png', 6),
+(13, 'https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/10/30/18/star-wars.jpg', 6),
+(14, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNBchsue7h4Q4DMrbHfkHVfNTFNI4ocjC283_ZKOWrgQvLWyMJSA', 6),
+(15, 'https://zdnet2.cbsistatic.com/hub/i/r/2017/12/19/981915a7-c8c1-4e34-b4b9-b781f4e6ff28/resize/770xauto/b8918195ed868c7157c07f8ed1a14df4/mickey-mouse-vs-darth-vader-star-wars-episode-vii.jpg', 6),
+(16, 'https://images-na.ssl-images-amazon.com/images/M/MV5BODQ0NjIzNjQ3MV5BMl5BanBnXkFtZTgwMTQ3MjgyNzE@._CR187,120,1281,960_UX614_UY460._SY230_SX307_AL_.jpg', 6);
 
 -- --------------------------------------------------------
 
@@ -83,8 +84,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `username`, `password`, `name`) VALUES
-(1, 'kyloren', 'darth4ever', 'Ben Solo'),
-(2, 'fShy34', 'friendshipism4gic', 'Fluttershy');
+(2, 'fShy34', 'friendshipism4gic', 'Fluttershy'),
+(6, 'kyloren', 'darth4ever', 'Han Solo');
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -123,13 +124,13 @@ ALTER TABLE `adminusers`
 -- Tilføj AUTO_INCREMENT i tabel `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -139,7 +140,7 @@ ALTER TABLE `users`
 -- Begrænsninger for tabel `images`
 --
 ALTER TABLE `images`
-  ADD CONSTRAINT `foreign key` FOREIGN KEY (`owner`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `foreign key` FOREIGN KEY (`owner`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
